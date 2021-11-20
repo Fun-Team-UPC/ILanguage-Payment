@@ -8,10 +8,10 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface PaymentHistoryViewRepository extends JpaRepository<PaymentView, String> {
-    @Query(value = "SELECT * FROM customer_history_view WHERE customer_history_id = (SELECT MAX(customer_history_id) FROM customer_history_view WHERE customer_id = :customerId)", nativeQuery = true)
-    Optional<PaymentHistoryView> getLastByPaymentId(String customerId);
+public interface PaymentHistoryViewRepository extends JpaRepository<PaymentHistoryView, String> {
+    @Query(value = "SELECT * FROM payment_history_view WHERE payment_history_id = (SELECT MAX(payment_history_id) FROM payment_history_view WHERE payment_id = :paymentId)", nativeQuery = true)
+    Optional<PaymentHistoryView> getLastByPaymentId(String paymentId);
 
-    @Query(value = "SELECT * FROM customer_history_view WHERE customer_id = :customerId ORDER BY created_at", nativeQuery = true)
-    List<PaymentHistoryView> save(PaymentHistoryView customerId);
+    @Query(value = "SELECT * FROM payment_history_view WHERE payment_id = :payment ORDER BY created_at", nativeQuery = true)
+    List<PaymentHistoryView> getHistoryByPaymentId(String paymentId);
 }

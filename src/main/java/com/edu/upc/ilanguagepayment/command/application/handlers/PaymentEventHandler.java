@@ -22,13 +22,17 @@ public class PaymentEventHandler {
 
     @EventHandler
     public void on(PaymentRegistered event) {
-        paymentInfraRepository.save(new PaymentInfra(event.getDescription(),event.getPaymentId()));
+        paymentInfraRepository.save(new PaymentInfra(
+                event.getPaymentId(),
+                event.getPaymentDate(),
+                event.getDescription(),
+                event.getCurrency(),
+                event.getAmount()
+        ));
     }
 
     @EventHandler
     public void on(PaymentEdited event) {
-        Optional<PaymentInfra> SessionInfraOptional = paymentInfraRepository.getDescriptionByPaymentId(event.getPaymentId());
-        SessionInfraOptional.ifPresent(paymentInfraRepository::delete);
-        paymentInfraRepository.save(new PaymentInfra(event.getDescription(),event.getPaymentId()));
+        paymentInfraRepository.save(new PaymentInfra(event.getDescription(), event.getPaymentId()));
     }
 }
