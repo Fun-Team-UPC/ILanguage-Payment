@@ -19,7 +19,7 @@ import java.util.Currency;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PaymentHistoryView {
-    @Id @GeneratedValue
+    @Id
     private long paymentHistoryId;
     private String paymentId;
     private LocalDateTime paymentDate;

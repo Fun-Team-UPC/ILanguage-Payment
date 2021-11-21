@@ -8,8 +8,8 @@ import java.util.Optional;
 
 @Repository
 public interface PaymentViewRepository extends JpaRepository<PaymentView, String> {
-	Optional<PaymentView> getByDescription(String description);
+	//Optional<PaymentView> getByDescription(String description);
 
-	@Query(value = "SELECT * FROM payment_view WHERE payment_id <> :paymentId AND description = :description", nativeQuery = true)
-	Optional<PaymentView> getByPaymentIdAndDescription(String paymentId, String description);
+	//@Query(value = "SELECT * FROM payment_view WHERE payment_id <> :paymentId AND description = :description", nativeQuery = true)
+	//Optional<PaymentView> getByPaymentIdAndDescription(String paymentId, String description);
 }

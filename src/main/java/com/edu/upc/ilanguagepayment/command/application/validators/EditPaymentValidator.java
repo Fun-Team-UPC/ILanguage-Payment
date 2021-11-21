@@ -19,11 +19,11 @@ import java.util.Optional;
 @Component
 public class EditPaymentValidator {
     private final PaymentInfraRepository paymentInfraRepository;
-    private final Repository<Payment> sessionRepository;
+    private final Repository<Payment> paymentRepository;
 
-    public EditPaymentValidator(PaymentInfraRepository paymentInfraRepository, Repository<Payment> sessionRepository){
+    public EditPaymentValidator(PaymentInfraRepository paymentInfraRepository, Repository<Payment> paymentRepository){
         this.paymentInfraRepository = paymentInfraRepository;
-        this.sessionRepository = sessionRepository;
+        this.paymentRepository = paymentRepository;
     }
 
     public Notification validate(EditPaymentRequest editPaymentRequest){
@@ -32,7 +32,7 @@ public class EditPaymentValidator {
         if(paymentId.isEmpty()){
             notification.addError("Payment id is required");
         }
-        loadSessionAggregate(paymentId);
+        loadPaymentAggregate(paymentId);
 
         String description = editPaymentRequest.getDescription().trim();
         if(description.isEmpty()){notification.addError("description is required");}
@@ -41,19 +41,15 @@ public class EditPaymentValidator {
         float amount = editPaymentRequest.getAmount();
         if(amount == 0){notification.addError("Amount is required");}
 
-        Optional<PaymentInfra> paymentInfra = paymentInfraRepository.getByDescriptionForDistinctPaymentId(description, paymentId);
-        if (paymentInfra.isPresent()){
-            notification.addError("Description is taken");
-        }
 
         return notification;
     }
 
-    private void loadSessionAggregate(String sessionId){
+    private void loadPaymentAggregate(String paymentId){
         UnitOfWork unitOfWork = null;
         try {
             unitOfWork = DefaultUnitOfWork.startAndGet(null);
-            sessionRepository.load(sessionId);
+            paymentRepository.load(paymentId);
             unitOfWork.commit();
         }catch (AggregateNotFoundException ex){
             unitOfWork.commit();

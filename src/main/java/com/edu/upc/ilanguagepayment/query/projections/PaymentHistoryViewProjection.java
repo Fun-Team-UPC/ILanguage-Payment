@@ -23,18 +23,18 @@ public class PaymentHistoryViewProjection {
         paymentHistoryViewRepository.save(paymentHistoryView);
     }
 
-    @EventHandler
-    public void on(PaymentEdited event, @Timestamp Instant timestamp) {
-        Optional<PaymentHistoryView> paymentHistoryViewOptional = paymentHistoryViewRepository.getLastByPaymentId(event.getPaymentId());
-        if (paymentHistoryViewOptional.isPresent()) {
-            PaymentHistoryView paymentHistoryView = paymentHistoryViewOptional.get();
-            paymentHistoryView = new PaymentHistoryView(paymentHistoryView);
-            paymentHistoryView.setPaymentDate(event.getPaymentDate());
-            paymentHistoryView.setDescription(event.getDescription());
-            paymentHistoryView.setCurrency(event.getCurrency());
-            paymentHistoryView.setAmount(event.getAmount());
-            paymentHistoryView.setCreatedAt(event.getOccurredOn());
-            paymentHistoryViewRepository.save(paymentHistoryView);
-        }
-    }
+    //@EventHandler
+    //public void on(PaymentEdited event, @Timestamp Instant timestamp) {
+    //    Optional<PaymentHistoryView> paymentHistoryViewOptional = paymentHistoryViewRepository.getLastByPaymentId(event.getPaymentId());
+    //    if (paymentHistoryViewOptional.isPresent()) {
+    //        PaymentHistoryView paymentHistoryView = paymentHistoryViewOptional.get();
+    //        paymentHistoryView = new PaymentHistoryView(paymentHistoryView);
+    //        paymentHistoryView.setPaymentDate(event.getPaymentDate());
+    //        paymentHistoryView.setDescription(event.getDescription());
+    //        paymentHistoryView.setCurrency(event.getCurrency());
+    //        paymentHistoryView.setAmount(event.getAmount());
+    //        paymentHistoryView.setCreatedAt(event.getOccurredOn());
+    //        paymentHistoryViewRepository.save(paymentHistoryView);
+    //    }
+    //}
 }

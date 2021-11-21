@@ -21,10 +21,15 @@ import java.util.Currency;
 public class PaymentView {
 	@Id
 	private String paymentId;
+	@Column()
 	private LocalDateTime paymentDate;
+	@Column(length=20)
 	private String description;
+	@Column()
 	private Currency currency;
+	@Column()
 	private float amount;
+	@Column(nullable = true)
 	private Instant updatedAt;
 
 	public PaymentView(String paymentId, LocalDateTime paymentDate, String description, Currency currency, float amount, Instant updatedAt) {

@@ -11,6 +11,11 @@ import com.edu.upc.ilanguagepayment.common.application.Notification;
 import com.edu.upc.ilanguagepayment.common.application.Result;
 
 import io.swagger.annotations.Api;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.axonframework.modelling.command.AggregateNotFoundException;
 import org.springframework.http.MediaType;
@@ -32,6 +37,17 @@ public class PaymentCommandController {
         this.paymentRepository = paymentRepository;
     }
 
+    @Operation(summary="Save payment", description="This endpoint is for saving a new payment for Ilanguage Application", tags = {"Payments"} )
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Payment registered", content = @Content(mediaType = "application/json",
+                    schema = @Schema( example = "{\"paymentId\": \"c1a4dd5a-f49c-46cb-b\",\"amount\": 50.90, \"currency\" : 0, \"description\" : \"Payment succesfull\", \"paymentDate\" : 2021-11-21T15:42:42.838Z}")
+            )),
+            @ApiResponse(responseCode = "400", description = "Bad request", content = @Content()),
+            @ApiResponse(responseCode = "404", description = "Payment Not Found", content = @Content()),
+            @ApiResponse(responseCode = "500", description = "Unexpected system error", content = @Content())
+
+    })
+
     @PostMapping(path = "", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Object> register(@RequestBody RegisterPaymentRequest registerPaymentRequest){
         try {
@@ -45,6 +61,8 @@ public class PaymentCommandController {
         }
     }
 
+
+    @Operation(summary="Edit payment", description="This endpoind is for editing an existing payment in Ilanguage Application", tags = {"Payments"} )
     @PutMapping("/{paymentId}")
     public ResponseEntity<Object> edit(@PathVariable("paymentId") String paymentId, @RequestBody EditPaymentRequest editPaymentRequest){
         try {

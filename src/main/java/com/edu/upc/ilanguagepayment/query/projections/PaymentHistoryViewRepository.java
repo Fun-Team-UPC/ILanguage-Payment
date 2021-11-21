@@ -9,9 +9,9 @@ import java.util.Optional;
 
 @Repository
 public interface PaymentHistoryViewRepository extends JpaRepository<PaymentHistoryView, String> {
-    @Query(value = "SELECT * FROM payment_history_view WHERE payment_history_id = (SELECT MAX(payment_history_id) FROM payment_history_view WHERE payment_id = :paymentId)", nativeQuery = true)
-    Optional<PaymentHistoryView> getLastByPaymentId(String paymentId);
+    //@Query(value = "SELECT * FROM payment_history_view WHERE payment_history_id = (SELECT MAX(payment_history_id) FROM payment_history_view WHERE payment_id = :paymentId)", nativeQuery = true)
+    //Optional<PaymentHistoryView> getLastByPaymentId(String paymentId);
 
-    @Query(value = "SELECT * FROM payment_history_view WHERE payment_id = :payment ORDER BY created_at", nativeQuery = true)
-    List<PaymentHistoryView> getHistoryByPaymentId(String paymentId);
+    //@Query(value = "SELECT * FROM payment_history_view WHERE payment_id = :payment ORDER BY created_at", nativeQuery = true)
+    //List<PaymentHistoryView> getHistoryByPaymentId(String paymentId);
 }
