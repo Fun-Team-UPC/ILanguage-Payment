@@ -36,7 +36,7 @@ public class PaymentView {
 		this.paymentId = paymentId;
 		this.paymentDate = paymentDate;
 		this.description = description;
-		this.currency = currency;
+		this.currency= currency;
 		this.amount = amount;
 		this.updatedAt = updatedAt;
 	}

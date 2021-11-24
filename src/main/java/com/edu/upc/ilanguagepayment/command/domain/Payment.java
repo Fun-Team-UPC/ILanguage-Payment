@@ -5,6 +5,7 @@ import com.edu.upc.ilanguagepayment.command.domain.contrats.commands.RegisterPay
 import com.edu.upc.ilanguagepayment.command.domain.contrats.events.PaymentEdited;
 import com.edu.upc.ilanguagepayment.command.domain.contrats.events.PaymentRegistered;
 
+import io.swagger.annotations.ApiModelProperty;
 import org.axonframework.commandhandling.CommandHandler;
 import org.axonframework.eventhandling.EventHandler;
 import org.axonframework.eventsourcing.EventSourcingHandler;
@@ -23,6 +24,7 @@ public class Payment {
     @AggregateIdentifier
     private String paymentId;
     private LocalDateTime paymentDate;
+    //@ApiModelProperty(notes = "Name of the Student",name="name",required=true,value="test name")
     private String description;
     private Currency currency;
     private float amount;

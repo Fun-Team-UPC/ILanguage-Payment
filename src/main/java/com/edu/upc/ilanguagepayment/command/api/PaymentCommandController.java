@@ -40,7 +40,7 @@ public class PaymentCommandController {
     @Operation(summary="Save payment", description="This endpoint is for saving a new payment for Ilanguage Application", tags = {"Payments"} )
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Payment registered", content = @Content(mediaType = "application/json",
-                    schema = @Schema( example = "{\"paymentId\": \"c1a4dd5a-f49c-46cb-b\",\"amount\": 50.90, \"currency\" : 0, \"description\" : \"Payment succesfull\", \"paymentDate\" : 2021-11-21T15:42:42.838Z}")
+                    schema = @Schema( example = "{\"paymentId\": \"c1a4dd5a-f49c-46cb-b\",\"amount\": 50.90, \"currency\": 0, \"description\" : \"Payment succesfull\", \"paymentDate\" : 2021-11-21T15:42:42.838Z}")
             )),
             @ApiResponse(responseCode = "400", description = "Bad request", content = @Content()),
             @ApiResponse(responseCode = "404", description = "Payment Not Found", content = @Content()),
