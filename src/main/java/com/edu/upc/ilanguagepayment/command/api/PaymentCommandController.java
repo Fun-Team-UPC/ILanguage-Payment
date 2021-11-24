@@ -63,7 +63,7 @@ public class PaymentCommandController {
 
 
     @Operation(summary="Edit payment", description="This endpoind is for editing an existing payment in Ilanguage Application", tags = {"Payments"} )
-    @PutMapping("/{paymentId}")
+    @PutMapping(path="/{paymentId}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Object> edit(@PathVariable("paymentId") String paymentId, @RequestBody EditPaymentRequest editPaymentRequest){
         try {
             editPaymentRequest.setPaymentId(paymentId);
